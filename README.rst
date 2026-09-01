@@ -1,15 +1,43 @@
 =====================================================================
- Database-backed Periodic Tasks
+ django-celery-beat-next
 =====================================================================
+
+A fork of `django-celery-beat`_ that you can install with Django 6.1.
 
 |build-status| |coverage| |license| |pyversion| |pyimp|
 
-:Version: 2.9.0
-:Web: http://django-celery-beat.readthedocs.io/
-:Download: http://pypi.python.org/pypi/django-celery-beat
-:Source: http://github.com/celery/django-celery-beat
-:DeepWiki: |deepwiki|
+:PyPI: django-celery-beat-next
+:Import: ``django_celery_beat``
+:Source: https://github.com/azataiot/django-celery-beat-next
+:Upstream: https://github.com/celery/django-celery-beat
+:Issue: `celery/django-celery-beat#1079`_
 :Keywords: django, celery, beat, periodic task, cron, scheduling
+
+This fork is not an official Celery project.
+
+Why this fork exists
+====================
+
+``django-celery-beat`` 2.9.0 requires ``Django<6.1``.
+A lockfile cannot take Django 6.1 while that requirement stands.
+
+Upstream ``main`` already runs the 6.1 tests.
+The requirement there is ``Django>=3.2.25,<6.2``.
+See `celery/django-celery-beat#1079`_ and `celery/django-celery-beat#1042`_.
+
+This repo follows that ``main`` branch.
+The import and the Django app label stay ``django_celery_beat``,
+so you do not touch migrations.
+Swap the dependency name only. Leave ``INSTALLED_APPS`` as it is.
+
+Do not depend on both packages at once. They install the same module.
+
+If a later ``django-celery-beat`` release accepts Django 6.1,
+switch to that release. Then drop this fork.
+
+.. _django-celery-beat: https://github.com/celery/django-celery-beat
+.. _celery/django-celery-beat#1079: https://github.com/celery/django-celery-beat/issues/1079
+.. _celery/django-celery-beat#1042: https://github.com/celery/django-celery-beat/pull/1042
 
 About
 =====
@@ -246,20 +274,20 @@ Both the worker and beat services need to be running at the same time.
 Installation
 ============
 
-You can install django-celery-beat either via the Python Package Index (PyPI)
+You can install django-celery-beat-next either via the Python Package Index (PyPI)
 or from source.
 
 To install using ``pip``:
 
 .. code-block:: bash
 
-        $ pip install --upgrade django-celery-beat
+        $ pip install --upgrade django-celery-beat-next
 
 Downloading and installing from source
 --------------------------------------
 
-Download the latest version of django-celery-beat from
-http://pypi.python.org/pypi/django-celery-beat
+Download the latest version of django-celery-beat-next from
+https://pypi.org/project/django-celery-beat-next/
 
 You can install it by doing the following :
 
@@ -268,8 +296,8 @@ You can install it by doing the following :
         $ python3 -m venv .venv
         $ source .venv/bin/activate
         $ pip install --upgrade build pip
-        $ tar xvfz django-celery-beat-0.0.0.tar.gz
-        $ cd django-celery-beat-0.0.0
+        $ tar xvfz django-celery-beat-next-0.0.0.tar.gz
+        $ cd django-celery-beat-next-0.0.0
         $ python -m build
         $ pip install --upgrade .
 
@@ -297,12 +325,12 @@ Using the development version
 With pip
 ~~~~~~~~
 
-You can install the latest main version of django-celery-beat using the following
+You can install the latest main version of django-celery-beat-next using the following
 pip command:
 
 .. code-block:: bash
 
-        $ pip install git+https://github.com/celery/django-celery-beat#egg=django-celery-beat
+        $ pip install git+https://github.com/azataiot/django-celery-beat-next.git#egg=django-celery-beat-next
 
 
 Developing django-celery-beat
@@ -323,33 +351,21 @@ TZ Awareness:
 If you have a project that is time zone naive, you can set ``DJANGO_CELERY_BEAT_TZ_AWARE=False`` in your settings file.
 
 
-.. |build-status| image:: https://github.com/celery/django-celery-beat/actions/workflows/test.yml/badge.svg
+.. |build-status| image:: https://github.com/azataiot/django-celery-beat-next/actions/workflows/test.yml/badge.svg
     :alt: Build status
-    :target: https://github.com/celery/django-celery-beat/actions/workflows/test.yml
+    :target: https://github.com/azataiot/django-celery-beat-next/actions/workflows/test.yml
 
 .. |coverage| image:: https://codecov.io/github/celery/django-celery-beat/coverage.svg?branch=main
     :target: https://codecov.io/github/celery/django-celery-beat?branch=main
 
-.. |license| image:: https://img.shields.io/pypi/l/django-celery-beat.svg#foo
+.. |license| image:: https://img.shields.io/pypi/l/django-celery-beat.svg
     :alt: BSD License
     :target: https://opensource.org/licenses/BSD-3-Clause
 
-.. |pyversion| image:: https://img.shields.io/pypi/pyversions/django-celery-beat.svg#foo
+.. |pyversion| image:: https://img.shields.io/pypi/pyversions/django-celery-beat.svg
     :alt: Supported Python versions.
-    :target: http://pypi.python.org/pypi/django-celery-beat/
+    :target: https://pypi.org/project/django-celery-beat-next/
 
-.. |pyimp| image:: https://img.shields.io/pypi/implementation/django-celery-beat.svg#foo
+.. |pyimp| image:: https://img.shields.io/pypi/implementation/django-celery-beat.svg
     :alt: Support Python implementations.
-    :target: http://pypi.python.org/pypi/django-celery-beat/
-
-.. |deepwiki| image:: https://devin.ai/assets/deepwiki-badge.png
-    :alt: Ask http://DeepWiki.com
-    :target: https://deepwiki.com/celery/django-celery-beat
-    :width: 125px
-
-django-celery-beat as part of the Tidelift Subscription
--------------------------------------------------------
-
-The maintainers of django-celery-beat and thousands of other packages are working with Tidelift to deliver commercial support and maintenance for the open source dependencies you use to build your applications. Save time, reduce risk, and improve code health, while paying the maintainers of the exact dependencies you use. `Learn more`_.
-
-.. _Learn more: https://tidelift.com/subscription/pkg/pypi-django-celery-beat?utm_source=pypi-django-celery-beat&utm_medium=referral&utm_campaign=readme&utm_term=repo
+    :target: https://pypi.org/project/django-celery-beat-next/
