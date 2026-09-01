@@ -6,7 +6,7 @@ import re
 
 import setuptools
 
-NAME = 'django-celery-beat'
+NAME = 'django-celery-beat-next'
 PACKAGE = 'django_celery_beat'
 
 # -*- Classifiers -*-
